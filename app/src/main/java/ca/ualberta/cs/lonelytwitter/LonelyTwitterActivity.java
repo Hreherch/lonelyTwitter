@@ -39,8 +39,22 @@ public class LonelyTwitterActivity extends Activity {
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
+
+				Tweet newTweet = new NormalTweet(text);
+				try {
+					newTweet.setMessage("This is a tweet");
+				} catch (TweetTooLongException e) {
+					e.printStackTrace();
+				}
+				ImportantTweet newestImportantTweet = new ImportantTweet(text);
+
+				ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
+				tweetList.add(newTweet);
+				tweetList.add(newestImportantTweet);
+
+
 				saveInFile(text, new Date(System.currentTimeMillis()));
-				finish();
+				finish();	// closes the app every time, which sucks...
 
 			}
 		});
