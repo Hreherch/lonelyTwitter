@@ -39,5 +39,29 @@ public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitte
         assertEquals( a, list.getTweet( 0 ) );
         assertEquals( b, list.getTweet( 1 ) );
     }
+
+    public void testDeleteTweet() {
+        TweetList list = new TweetList();
+        Tweet a = new NormalTweet( "Hello World!" );
+        list.add( a );
+        assertTrue( list.hasTweet( a ) );
+        list.delete( a );
+        assertFalse( list.hasTweet( a ) );
+    }
+
+    // should return Illegal Arg Exception
+    public void testDuplicateTweetAddition() {
+        TweetList list = new TweetList();
+        Tweet a = new NormalTweet( "Hello World!" );
+        list.add( a );
+        try {
+            list.add( a );
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue( true );
+        }  catch (Exception e) {
+            fail();
+        }
+    }
 }
 

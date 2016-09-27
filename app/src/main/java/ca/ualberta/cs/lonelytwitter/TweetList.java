@@ -9,7 +9,11 @@ import java.util.List;
 public class TweetList {
     List<Tweet> tweets = new ArrayList<Tweet>();
     public void add(Tweet tweet) {
-        tweets.add( tweet );
+        if (hasTweet(tweet)) {
+            throw new IllegalArgumentException( "No duplicate tweets." );
+        } else {
+            tweets.add( tweet );
+        }
     }
 
     public boolean hasTweet(Tweet tweet) {
@@ -18,5 +22,9 @@ public class TweetList {
 
     public Tweet getTweet(int i) {
         return tweets.get( i );
+    }
+
+    public void delete(Tweet a) {
+        tweets.remove( a );
     }
 }
