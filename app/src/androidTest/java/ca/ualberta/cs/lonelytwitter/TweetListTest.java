@@ -88,5 +88,24 @@ public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitte
         assertEquals( c, list.getTweets().get(2) );
 
     }
+
+    public void testCountingTweets() {
+        TweetList list = new TweetList();
+        Tweet a = new NormalTweet( "Hello World!" );
+        Tweet b = new NormalTweet( "nothing interesting");
+        Tweet c = new NormalTweet( "ugh, life." );
+
+        assertEquals( 0, list.getCount() );
+        list.add( a );
+        assertEquals( 1, list.getCount() );
+        list.add( b );
+        list.add( c );
+        assertEquals( 3, list.getCount() );
+        list.delete( a );
+        assertEquals( 2, list.getCount() );
+        list.removeTweet( b );
+        list.removeTweet( c );
+        assertEquals( 0, list.getCount() );
+    }
 }
 

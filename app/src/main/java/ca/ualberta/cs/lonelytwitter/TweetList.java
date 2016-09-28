@@ -22,6 +22,7 @@ public class TweetList {
     }
 
     public boolean hasTweet(Tweet tweet) {
+
         return tweets.contains( tweet );
     }
 
@@ -31,6 +32,14 @@ public class TweetList {
 
     public void delete(Tweet a) {
         tweets.remove( a );
+    }
+
+    public void removeTweet(Tweet a ) {
+        delete( a );
+    }
+
+    public int getCount() {
+        return tweets.size();
     }
 
     public List<Tweet> getTweets() {
