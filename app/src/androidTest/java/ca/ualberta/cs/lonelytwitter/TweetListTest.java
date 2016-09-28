@@ -2,6 +2,10 @@ package ca.ualberta.cs.lonelytwitter;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  * Created by Ben on 2016-09-27.
  */
@@ -62,6 +66,27 @@ public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitte
         }  catch (Exception e) {
             fail();
         }
+    }
+
+    public void testOrderedTweetReturn() {
+        TweetList list = new TweetList();
+        GregorianCalendar calendar = new GregorianCalendar();
+        Tweet a = new NormalTweet( "Hello World!" );
+        Tweet b = new NormalTweet( "nothing interesting");
+        calendar.add( Calendar.DATE, -1 );
+        b.setDate( calendar.getTime() );
+        Tweet c = new NormalTweet( "ugh, life." );
+        calendar.add( Calendar.DATE, -1 );
+        c.setDate( calendar.getTime() );
+
+        list.add( b );
+        list.add( c );
+        list.add( a );
+
+        assertEquals( a, list.getTweets().get(0) );
+        assertEquals( b, list.getTweets().get(1) );
+        assertEquals( c, list.getTweets().get(2) );
+
     }
 }
 

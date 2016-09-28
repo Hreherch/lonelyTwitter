@@ -15,4 +15,5 @@ public class ImportantTweet extends Tweet {
         return Boolean.TRUE;
     }
 
+
 }

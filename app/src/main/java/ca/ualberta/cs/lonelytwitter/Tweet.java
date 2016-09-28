@@ -6,12 +6,17 @@ import java.util.Date;
 /**
  * Created by Ben on 2016-09-13.
  */
-public abstract class Tweet implements Tweetable {
+public abstract class Tweet implements Tweetable, Comparable {
     private String message;
     private Date date;
     private ArrayList<Mood> moodList = new ArrayList<Mood>();
 
-    public Tweet( String message ) {
+    public int compareTo(Object o) {
+        Tweet aTweet = (Tweet) o;
+        return aTweet.getDate().compareTo( this.getDate() );
+    }
+
+    public Tweet(String message ) {
         this.message = message;
         this.date = new Date();
     }
@@ -58,4 +63,5 @@ public abstract class Tweet implements Tweetable {
     public String toString() {
         return date.toString() + " | " + message;
     }
+
 }

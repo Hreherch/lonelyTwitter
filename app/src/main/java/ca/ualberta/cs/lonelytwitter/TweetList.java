@@ -1,6 +1,8 @@
 package ca.ualberta.cs.lonelytwitter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -8,11 +10,14 @@ import java.util.List;
  */
 public class TweetList {
     List<Tweet> tweets = new ArrayList<Tweet>();
+
+    @SuppressWarnings( "unchecked" )
     public void add(Tweet tweet) {
         if (hasTweet(tweet)) {
             throw new IllegalArgumentException( "No duplicate tweets." );
         } else {
             tweets.add( tweet );
+            Collections.sort( tweets );
         }
     }
 
@@ -26,5 +31,9 @@ public class TweetList {
 
     public void delete(Tweet a) {
         tweets.remove( a );
+    }
+
+    public List<Tweet> getTweets() {
+        return tweets;
     }
 }
