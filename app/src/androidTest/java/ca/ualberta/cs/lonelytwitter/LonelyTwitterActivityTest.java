@@ -76,13 +76,17 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2<
         solo.clickOnButton("Save");
 
         solo.clearEditText((EditText) solo.getView(R.id.body));
+        solo.enterText((EditText) solo.getView(R.id.body), "my tweet!");
+        solo.clickOnButton("Save");
+
+        solo.clearEditText((EditText) solo.getView(R.id.body));
         assertTrue( solo.waitForText("Toast Tweet!"));
 
         final ListView oldTweetList = activity.getOldTweetsList();
         Tweet tweet = (Tweet) oldTweetList.getItemAtPosition(0);
         assertTrue( "Toast Tweet!".equals(tweet.getMessage()) );
 
-        solo.clickInList(0);
+        solo.clickInList(1);
 
         solo.assertCurrentActivity("Wrong Activity", EditTweetActivity.class);
 
@@ -91,5 +95,17 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2<
         solo.goBack();
 
         solo.assertCurrentActivity("Wrong Activity", LonelyTwitterActivity.class );
+
+        solo.clickInList(2);
+
+        solo.assertCurrentActivity("Wrong Activity", EditTweetActivity.class);
+
+        assertTrue( solo.waitForText( "my tweet!"));
+
+        solo.goBack();
+
+        solo.assertCurrentActivity("Wrong Activity", LonelyTwitterActivity.class );
+
+
     }
 }
