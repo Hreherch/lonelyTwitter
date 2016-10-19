@@ -31,8 +31,14 @@ public class ElasticSearchTweetController {
 
             ArrayList<NormalTweet> tweets = new ArrayList<NormalTweet>();
 
+            String search_string = "{\"from\": 0, \"size\": 100000}";
+            if (!search_parameters[0].equals("")) {
+                System.out.println("testing:" + search_parameters[0] );
+                search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"message\": \"" + search_parameters[0] + "\"}}}";
+            }
+
             // assume that search_param[0] os the only search term we are interested in using
-            Search search= new Search.Builder(search_parameters[0])
+            Search search= new Search.Builder(search_string)
                     .addIndex("testing")
                     .addType("tweet")
                     .build();
@@ -48,7 +54,6 @@ public class ElasticSearchTweetController {
             }catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to talk to elastic search");
             }
-
 
             return tweets;
         }
